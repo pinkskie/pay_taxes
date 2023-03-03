@@ -1,7 +1,10 @@
 import { createApp } from "vue";
-import "./style.css";
+import { createPinia } from "pinia";
+
 import App from "./App.vue";
 import router from "./router";
-import { createPinia } from "pinia";
+
+import "./style.css";
+import "@webzlodimir/vue-bottom-sheet/dist/style.css";
 
 createApp(App).use(createPinia()).use(router).mount("#app");

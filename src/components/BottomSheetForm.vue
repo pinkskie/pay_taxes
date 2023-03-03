@@ -1,35 +1,27 @@
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
-import { VueBottomSheet } from "@webzlodimir/vue-bottom-sheet";
+import { defineComponent, reactive } from "vue";
+import { useRouter } from "vue-router";
 
-import { useFormStore } from "../store/form";
+import { tax_types, useFormStore } from "../store/form";
 
 import Button from "./Button.vue";
 import TextField from "./TextField.vue";
 import Select from "./Select.vue";
 
-import KrestikIcon from "../assets/icons/KrestikIcon.vue";
-import "@webzlodimir/vue-bottom-sheet/dist/style.css";
-import { useRouter } from "vue-router";
+import CloseIcon from "../assets/icons/CloseIcon.vue";
 
 export default defineComponent({
   components: {
     Select,
     Button,
     TextField,
-    KrestikIcon,
-    VueBottomSheet,
+    CloseIcon,
   },
   emits: ["close"],
   setup() {
-    const bottomSheet = ref<InstanceType<typeof VueBottomSheet> | null>(null);
     const form = useFormStore();
     const router = useRouter();
     const regex = /^[0-9]+$/; // принимает только цифры
-
-    const closeBottomSheet = () => {
-      close;
-    };
 
     const errors = reactive({
       name: "",
@@ -37,13 +29,6 @@ export default defineComponent({
       iin: "",
       income: "",
     });
-
-    const maxLength = () => {
-      console.log(form.iin.length);
-      if (form.iin.length === 12) {
-        return;
-      }
-    };
 
     const handleValidate = () => {
       // name validation
@@ -64,7 +49,7 @@ export default defineComponent({
       if (form.iin.length < 11) {
         errors.iin = "ИИН должен содержать 12 цифр";
       } else if (!regex.test(form.iin)) {
-        errors.iin = "Введите только числа"; // тут можно было бы просто прописать type=number, просто для практики
+        errors.iin = "Введите только числа";
       } else {
         errors.iin = "";
       }
@@ -78,12 +63,7 @@ export default defineComponent({
         errors.income = "";
       }
 
-      if (
-        (!!errors.name ||
-          !!errors.last_name ||
-          !!errors.iin ||
-          !!errors.income) === false
-      ) {
+      if (Object.values(errors).every((el) => !el)) {
         router.push("/taxes");
       }
     };
@@ -91,10 +71,8 @@ export default defineComponent({
     return {
       form,
       errors,
-      bottomSheet,
-      maxLength,
+      options: tax_types,
       handleValidate,
-      closeBottomSheet,
     };
   },
 });
@@ -103,8 +81,8 @@ export default defineComponent({
 <template>
   <div class="bottomSheet-header">
     Заплатить налоги за ИП
-    <button @click="$emit('close')" class="krestik">
-      <KrestikIcon />
+    <button @click="$emit('close')" class="close-btn">
+      <CloseIcon />
     </button>
   </div>
   <div class="form">
@@ -117,8 +95,7 @@ export default defineComponent({
         label="Имя"
         type="text"
         placeholder="Имя"
-        @update:value="form.changeName"
-        :keypress="maxLength"
+        @change="form.changeName"
         :value="form.name"
         :error="errors.name"
       />
@@ -126,36 +103,36 @@ export default defineComponent({
         label="Фамилия"
         type="text"
         placeholder="Фамилия"
-        @update:value="form.changeLastName"
+        @change="form.changeLastName"
         :value="form.last_name"
         :error="errors.last_name"
       />
     </div>
     <TextField
-      label="ИНН"
-      type="text"
-      placeholder="ИНН"
-      @update:value="form.changeIin"
+      label="ИИН"
+      type="number"
+      placeholder="ИИН"
+      @change="form.changeIin"
       :value="form.iin"
       :error="errors.iin"
-      :maxLength="12"
+      :maxlength="12"
     />
-    <Select />
+    <Select :options="options" @change="form.changeTaxType" />
     <TextField
       label="Ваш доход за пол года"
       type="number"
       placeholder="Сумма дохода"
-      @update:value="form.changeIncome"
+      @change="form.changeIncome"
       :value="form.income === 0 ? '' : form.income.toString()"
       :error="errors.income"
     />
-    <Button @onClick="handleValidate" variant="contained" class="btn-position"
-      >Рассчитать</Button
-    >
+    <Button @onClick="handleValidate" variant="contained" class="btn-position">
+      Рассчитать
+    </Button>
   </div>
 </template>
 
-<style>
+<style scoped>
 .form {
   display: flex;
   flex-direction: column;
@@ -188,7 +165,7 @@ export default defineComponent({
   margin-top: 48px;
 }
 
-.krestik {
+.close-btn {
   background-color: transparent;
   border: none;
   cursor: pointer;

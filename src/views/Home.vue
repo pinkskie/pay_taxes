@@ -44,7 +44,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style>
+<style scoped>
 .home {
   height: 100vh;
   display: flex;

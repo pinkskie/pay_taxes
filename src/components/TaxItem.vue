@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { ITaxesWithPrice, useFormStore } from "../store/form";
+import { ITaxesWithPrice } from "../store/form";
 
 import DetailsIcon from "../assets/icons/DetailsIcon.vue";
 
@@ -9,14 +9,11 @@ export default defineComponent({
   components: {
     DetailsIcon,
   },
-  emits: ["onChange"],
+  emits: ["change"],
   props: {
     tax: {
       type: Object as PropType<ITaxesWithPrice>,
       required: true,
-    },
-    onChange: {
-      type: Function as PropType<() => void>,
     },
   },
 });
@@ -26,14 +23,18 @@ export default defineComponent({
   <div class="tax-item">
     <div class="head">
       <label class="label">
-        <input type="checkbox" :checked="tax.checked" @change="onChange" />
+        <input
+          type="checkbox"
+          :checked="tax.checked"
+          @change="$emit('change', tax.id)"
+        />
         <span class="checkmark"></span>
         <h2 class="text">
-          {{ tax.label
-          }}<span
-            >( {{ tax.percent }}% от дохода
-            {{ tax.not_less && `но не меньше ${tax.not_less} ₸` }} )</span
-          >
+          {{ tax.label }}
+          <span>
+            ( {{ tax.percent }}% от дохода
+            {{ tax.not_less && `но не меньше ${tax.not_less} ₸` }} )
+          </span>
         </h2>
       </label>
     </div>
@@ -71,7 +72,7 @@ export default defineComponent({
   align-items: center;
 }
 
-.container input:checked ~ .checkmark {
+input:checked ~ .checkmark {
   background-color: black;
   border: 1px solid transparent;
 }
@@ -82,11 +83,11 @@ export default defineComponent({
   display: none;
 }
 
-.container input:checked ~ .checkmark:after {
+input:checked ~ .checkmark:after {
   display: block;
 }
 
-.container .checkmark:after {
+.checkmark:after {
   top: 5px;
   width: 5px;
   height: 10px;
@@ -106,6 +107,7 @@ export default defineComponent({
   flex-direction: column;
   gap: 32px;
 }
+
 .head {
   display: flex;
   justify-content: space-between;
@@ -128,12 +130,5 @@ export default defineComponent({
   color: #9d9d9d;
   font-size: 14px;
   max-width: 120px;
-}
-
-.circle {
-  border: 1px solid #dfe3e6;
-  border-radius: 100%;
-  height: 25px;
-  width: 25px;
 }
 </style>

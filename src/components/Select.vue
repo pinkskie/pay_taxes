@@ -1,45 +1,49 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
-import { required } from "vuelidate/lib/validators";
 import ChevronIcon from "../assets/icons/ChevronIcon.vue";
 import { useFormStore } from "../store/form";
-import { tax_types } from "../store/form";
 
 export default defineComponent({
   components: { ChevronIcon },
-  setup() {
+  props: {
+    options: {
+      type: Array as PropType<{ label: string; value: number }[]>,
+      required: true,
+    },
+  },
+  emits: ["change"],
+  setup(_, { emit }) {
     const form = useFormStore();
-    const options = tax_types; // можно сделать масштабируемым примимая в качестве пропса
-    const openOptions = ref<boolean>();
+    const isOpen = ref<boolean>(false);
 
     const toggleOptions = () => {
-      openOptions.value = !openOptions.value;
+      isOpen.value = !isOpen.value;
     };
 
     const selectOption = (value: number) => {
-      form.changeTaxType(value);
+      emit("change", value);
       toggleOptions;
     };
 
     return {
       form,
-      options,
-      openOptions,
-      toggleOptions,
+      isOpen,
       selectOption,
+      toggleOptions,
     };
   },
 });
 </script>
 
 <template>
-  <div class="select" :class="[openOptions && 'active']" @click="toggleOptions">
+  <div class="select" :class="[isOpen && 'active']" @click="toggleOptions">
     {{ form.tax_type.label }}
     <ChevronIcon />
     <Transition>
-      <div class="options" v-show="openOptions">
+      <ul class="options" v-show="isOpen">
         <li
           class="option"
+          :class="[form.tax_type.value === option.value && 'active-option']"
           v-for="option in options"
           :key="option.label"
           :value="option.value"
@@ -47,12 +51,12 @@ export default defineComponent({
         >
           {{ option.label }}
         </li>
-      </div>
+      </ul>
     </Transition>
   </div>
 </template>
 
-<style>
+<style scoped>
 .select {
   width: 100%;
   border: 1px solid #dfe3e6;
@@ -92,6 +96,11 @@ export default defineComponent({
   border: 1px solid transparent;
   transition: 0.1s ease;
 }
+
+.active-option {
+  background: rgba(0, 0, 0, 0.1);
+}
+
 .option:hover {
   background-color: black;
   border: 1px solid black;

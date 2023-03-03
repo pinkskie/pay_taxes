@@ -27,7 +27,7 @@ export default defineComponent({
       }
     };
 
-    const handleChange = (id: number) => () => {
+    const handleChange = (id: number) => {
       form.checkTax(id);
     };
 
@@ -62,12 +62,12 @@ export default defineComponent({
         v-for="tax in form.taxes_with_price"
         :tax="tax"
         :key="tax.id"
-        :onChange="handleChange(tax.id)"
+        @change="handleChange"
       />
     </div>
-    <span class="error" v-show="error"
-      >Должен быть выбран хотя бы один налог</span
-    >
+    <span class="error" v-show="error">
+      Должен быть выбран хотя бы один налог
+    </span>
     <div class="submit">
       <div class="sum">
         <div>Итого к оплате за полугодие:</div>
@@ -122,13 +122,11 @@ export default defineComponent({
 }
 
 .error {
-  background-color: rgba(253, 2, 2, 0.226);
+  background-color: rgb(253 2 2 / 20%);
   width: 100%;
-  border: 1px solid rgb(121, 0, 0);
   color: rgb(121, 0, 0);
-  padding: 10px;
+  padding: 15px 25px;
   border-radius: 4px;
-  margin-bottom: 16px;
   display: block;
 }
 </style>

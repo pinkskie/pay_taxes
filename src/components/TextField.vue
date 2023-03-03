@@ -22,11 +22,11 @@ export default defineComponent({
     error: {
       type: String,
     },
-    maxLength: {
+    maxlength: {
       type: Number,
     },
   },
-  emits: ["update:value"],
+  emits: ["change"],
 });
 </script>
 
@@ -37,9 +37,9 @@ export default defineComponent({
       class="textfield"
       :type="type"
       :placeholder="placeholder"
-      :maxlength="maxLength"
+      :maxlength="maxlength"
       :value="value"
-      @input="$emit('update:value', ($event.target as HTMLInputElement).value)"
+      @input="$emit('change', ($event.target as HTMLInputElement).value)"
     />
     <span class="error" v-show="error">{{ error }}</span>
   </label>

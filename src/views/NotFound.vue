@@ -31,7 +31,7 @@ export default defineComponent({
   </div>
 </template>
 
-<style>
+<style scoped>
 .NotFound {
   width: 100%;
   height: 100vh;
