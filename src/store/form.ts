@@ -5,10 +5,11 @@ export const tax_types = [
   { label: "Общеустановленный", value: 2 },
 ];
 
-interface ITaxesWithPrice {
+export interface ITaxesWithPrice {
   id: number;
   label: string;
   checked: boolean;
+  not_less?: number;
   percent: number;
   price: number;
 }
@@ -24,7 +25,7 @@ export const useFormStore = defineStore({
     income: 0,
     taxes: [
       { id: 1, label: "ИПН", checked: false, percent: 3 },
-      { id: 2, label: "СО", checked: false, percent: 3.5 },
+      { id: 2, label: "СО", checked: false, not_less: 5000, percent: 3.5 },
       { id: 3, label: "ОПВ", checked: false, percent: 10 },
       { id: 4, label: "ВОСМС", checked: false, percent: 5 },
     ],

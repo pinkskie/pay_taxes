@@ -60,12 +60,9 @@ export default defineComponent({
     <div class="taxes-items">
       <TaxItem
         v-for="tax in form.taxes_with_price"
+        :tax="tax"
         :key="tax.id"
-        :label="tax.label"
-        :description="`${tax.percent}% от дохода`"
-        :checked="tax.checked"
         :onChange="handleChange(tax.id)"
-        :price="tax.price"
       />
     </div>
     <span class="error" v-show="error"

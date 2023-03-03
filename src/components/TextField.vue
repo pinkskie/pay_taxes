@@ -22,9 +22,6 @@ export default defineComponent({
     error: {
       type: String,
     },
-    keypress: {
-      type: Function as PropType<() => void>,
-    },
   },
   emits: ["update:value"],
 });

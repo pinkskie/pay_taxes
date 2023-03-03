@@ -1,5 +1,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
+import { ITaxesWithPrice, useFormStore } from "../store/form";
+
 import DetailsIcon from "../assets/icons/DetailsIcon.vue";
 
 export default defineComponent({
@@ -7,18 +9,11 @@ export default defineComponent({
   components: {
     DetailsIcon,
   },
+  emits: ["onChange"],
   props: {
-    label: {
-      type: String,
-    },
-    description: {
-      type: String,
-    },
-    price: {
-      type: Number,
-    },
-    checked: {
-      type: Boolean,
+    tax: {
+      type: Object as PropType<ITaxesWithPrice>,
+      required: true,
     },
     onChange: {
       type: Function as PropType<() => void>,
@@ -31,16 +26,20 @@ export default defineComponent({
   <div class="tax-item">
     <div class="head">
       <label class="label">
-        <input type="checkbox" :checked="checked" @change="onChange" />
+        <input type="checkbox" :checked="tax.checked" @change="onChange" />
         <span class="checkmark"></span>
         <h2 class="text">
-          {{ label }}<span>( {{ description }} )</span>
+          {{ tax.label
+          }}<span
+            >( {{ tax.percent }}% от дохода
+            {{ tax.not_less && `но не меньше ${tax.not_less} ₸` }} )</span
+          >
         </h2>
       </label>
     </div>
     <Transition>
-      <div class="body" v-show="checked">
-        <h2 class="text">{{ price }} ₸</h2>
+      <div class="body" v-show="tax.checked">
+        <h2 class="text">{{ tax.price.toLocaleString() }} ₸</h2>
         <DetailsIcon />
       </div>
     </Transition>
@@ -128,6 +127,7 @@ export default defineComponent({
   display: block;
   color: #9d9d9d;
   font-size: 0.75rem;
+  max-width: 6.5rem;
 }
 
 .circle {
