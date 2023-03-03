@@ -23,6 +23,7 @@ export default defineComponent({
   },
 });
 </script>
+
 <template>
   <div class="details container">
     <p class="title">

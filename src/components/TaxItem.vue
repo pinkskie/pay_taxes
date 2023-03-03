@@ -33,10 +33,10 @@ export default defineComponent({
       <label class="label">
         <input type="checkbox" :checked="checked" @change="onChange" />
         <span class="checkmark"></span>
+        <h2 class="text">
+          {{ label }}<span>( {{ description }} )</span>
+        </h2>
       </label>
-      <h2 class="text">
-        {{ label }}<span>( {{ description }} )</span>
-      </h2>
     </div>
     <Transition>
       <div class="body" v-show="checked">
@@ -47,10 +47,14 @@ export default defineComponent({
   </div>
 </template>
 
-<style>
+<style scoped>
 .label {
   user-select: none;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .label input {

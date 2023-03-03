@@ -1,10 +1,13 @@
 <script lang="ts">
+import { defineComponent, ref, watch } from "vue";
+
 import TaxItem from "../components/TaxItem.vue";
 import Button from "../components/Button.vue";
 import ChevronIcon from "../assets/ChevronIcon.vue";
 import { useFormStore } from "../store/form";
+import { useRouter } from "vue-router";
 
-export default {
+export default defineComponent({
   components: {
     TaxItem,
     Button,
@@ -12,21 +15,30 @@ export default {
   },
   setup() {
     const form = useFormStore();
+    const router = useRouter();
+    const error = ref<boolean>(false);
 
-    const handleClick = () => {
-      alert(1);
+    const handleValidate = () => {
+      if (form.selectedTaxes().length === 0) {
+        error.value = true;
+      } else {
+        error.value = false;
+        router.push("/details");
+      }
     };
 
     const handleChange = (id: number) => () => {
       form.checkTax(id);
     };
+    watch(form.selectedTaxes(), () => {});
     return {
-      handleClick,
+      handleValidate,
       handleChange,
       form,
+      error,
     };
   },
-};
+});
 </script>
 
 <template>
@@ -50,23 +62,18 @@ export default {
         :price="tax.price"
       />
     </div>
+    <span class="error" v-show="error"
+      >Должен быть выбран хотя бы один налог</span
+    >
     <div class="inline">
       <div>Итого к оплате за полугодие:</div>
-      <div>{{ form.total() }} ₸</div>
+      <div class="total">{{ form.total() }} ₸</div>
     </div>
-    <Button :onClick="handleClick">Оплатить</Button>
+    <Button :onClick="handleValidate">Оплатить</Button>
   </div>
 </template>
 
 <style scoped>
-.inline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1.5rem;
-  font-style: italic;
-  margin-bottom: 2rem;
-}
 .navigation {
   display: flex;
   align-items: center;
@@ -76,10 +83,33 @@ export default {
   padding: 0.5rem 1.5rem;
   margin-bottom: 1rem;
 }
+.inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.total {
+  white-space: nowrap;
+}
 .taxes-items {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
+}
+
+.error {
+  background-color: rgba(253, 2, 2, 0.226);
+  width: 100%;
+  border: 1px solid rgb(121, 0, 0);
+  color: rgb(121, 0, 0);
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 4rem;
+  display: block;
 }
 </style>
