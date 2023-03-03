@@ -12,8 +12,20 @@ body {
 
 a {
   text-decoration: inherit;
+  color: initial;
+  cursor: pointer;
 }
 
 .container {
   padding: 1.5rem;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }

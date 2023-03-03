@@ -13,6 +13,7 @@
     "@webzlodimir/vue-bottom-sheet": "^2.0.2",
     "pinia": "^2.0.32",
     "vue": "^3.2.45",
+    "vue-custom-select": "^1.0.10",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

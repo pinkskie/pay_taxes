@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import DetailsIcon from "../assets/DetailsIcon.vue";
+import DetailsIcon from "../assets/icons/DetailsIcon.vue";
 
 export default defineComponent({
   name: "TaxItem",
@@ -135,15 +135,5 @@ export default defineComponent({
   border-radius: 100%;
   height: 25px;
   width: 25px;
-}
-
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
 }
 </style>

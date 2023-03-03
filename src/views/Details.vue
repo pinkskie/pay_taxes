@@ -3,11 +3,15 @@ import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 
 import Button from "../components/Button.vue";
-import CheckIcon from "../assets/CheckIcon.vue";
+import CheckIcon from "../assets/icons/CheckIcon.vue";
 import { useFormStore } from "../store/form";
 
 export default defineComponent({
-  components: { Button, CheckIcon },
+  components: {
+    Button,
+    CheckIcon,
+  },
+
   setup() {
     const router = useRouter();
     const form = useFormStore();

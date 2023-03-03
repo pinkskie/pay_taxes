@@ -39,9 +39,7 @@ export default defineComponent({
       :placeholder="placeholder"
       :value="value"
       @input="$emit('update:value', ($event.target as HTMLInputElement).value)"
-      @keypress="keypress"
     />
-    <!-- Прыгает  при появлении -->
     <span class="error" v-show="error">{{ error }}</span>
   </label>
 </template>

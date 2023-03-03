@@ -21,7 +21,7 @@ export const useFormStore = defineStore({
     last_name: "",
     iin: "",
     tax_type: { label: "Упрощенный", value: 1 },
-    income: 500000,
+    income: 0,
     taxes: [
       { id: 1, label: "ИПН", checked: false, percent: 3 },
       { id: 2, label: "СО", checked: false, percent: 3.5 },
