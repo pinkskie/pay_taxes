@@ -16,17 +16,30 @@ export default defineComponent({
       required: true,
     },
   },
+  setup(props) {
+    const isDisabled = () => {
+      if (props.tax?.not_less) {
+        return props.tax.price < props.tax.not_less;
+      }
+      return false;
+    };
+
+    return {
+      isDisabled,
+    };
+  },
 });
 </script>
 
 <template>
   <div class="tax-item">
     <div class="head">
-      <label class="label">
+      <label class="label" :class="[isDisabled() && 'disable']">
         <input
           type="checkbox"
           :checked="tax.checked"
           @change="$emit('change', tax.id)"
+          :disabled="isDisabled()"
         />
         <span class="checkmark"></span>
         <h2 class="text">
@@ -55,6 +68,10 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.disable {
+  opacity: 0.4;
 }
 
 .label input {
