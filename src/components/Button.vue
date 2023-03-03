@@ -33,6 +33,7 @@ export default defineComponent({
   cursor: pointer;
   font-family: "Cuprum", sans-serif;
 }
+
 .contained {
   color: white;
   background-color: black;
@@ -43,6 +44,7 @@ export default defineComponent({
   border: 1px solid black;
   width: fit-content;
 }
+
 .text {
   background-color: white;
   padding: 0;
@@ -52,6 +54,7 @@ export default defineComponent({
 .contained:hover {
   box-shadow: 0px 0px 24px #9d9d9d;
 }
+
 .contained:focus {
   box-shadow: 0px 0px 24px #9d9d9d;
 }
@@ -60,6 +63,7 @@ export default defineComponent({
   background-color: #000;
   color: white;
 }
+
 .outlined:focus {
   background-color: #000;
   color: white;
@@ -68,6 +72,7 @@ export default defineComponent({
 .text:hover {
   transform: scale(1.05);
 }
+
 .text:focus {
   transform: scale(1.05);
 }

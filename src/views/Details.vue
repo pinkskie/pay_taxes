@@ -11,7 +11,6 @@ export default defineComponent({
     Button,
     CheckIcon,
   },
-
   setup() {
     const router = useRouter();
     const form = useFormStore();
@@ -21,8 +20,8 @@ export default defineComponent({
     };
 
     return {
-      handleClick,
       form,
+      handleClick,
     };
   },
 });
@@ -80,6 +79,7 @@ export default defineComponent({
   flex-direction: column;
   justify-content: space-between;
 }
+
 .title {
   display: flex;
   align-items: center;
@@ -90,17 +90,20 @@ export default defineComponent({
   flex-direction: column;
   gap: 16px;
 }
+
 .information {
   display: flex;
   flex-direction: column;
   gap: 16px;
   font-style: italic;
 }
+
 .information-text {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .total {
   margin-top: 32px;
 }

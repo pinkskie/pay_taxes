@@ -110,7 +110,7 @@ export default defineComponent({
     </div>
     <TextField
       label="ИИН"
-      type="number"
+      type="text"
       placeholder="ИИН"
       @change="form.changeIin"
       :value="form.iin"
@@ -144,6 +144,7 @@ export default defineComponent({
   line-height: 24px;
   margin-bottom: 16px;
 }
+
 .user {
   display: flex;
   align-items: center;

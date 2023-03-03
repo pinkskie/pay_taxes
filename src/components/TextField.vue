@@ -55,6 +55,7 @@ export default defineComponent({
   width: 100%;
   position: relative;
 }
+
 .textfield {
   padding: 10px 8px;
   border: 1px solid #dfe3e6;
@@ -62,12 +63,12 @@ export default defineComponent({
   outline: none;
   transition: 0.2s ease;
   font-family: "Cuprum", sans-serif;
-  font-size: 16px;
 }
 
 .textfield:focus {
   border: 1px solid black;
 }
+
 .error {
   margin-top: -0.48px;
   font-size: 14px;

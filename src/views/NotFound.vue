@@ -23,7 +23,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="NotFound">
+  <div class="not-found">
     <img src="../assets/404.png" alt="404" />
     <Button @onClick="handleClick" variant="text">
       Вернуться на главную
@@ -32,7 +32,7 @@ export default defineComponent({
 </template>
 
 <style scoped>
-.NotFound {
+.not-found {
   width: 100%;
   height: 100vh;
   font-size: 80px;

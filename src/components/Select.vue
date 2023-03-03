@@ -90,6 +90,7 @@ export default defineComponent({
   max-height: 160px;
   overflow-y: scroll;
 }
+
 .option {
   padding: 10px;
   outline: none;

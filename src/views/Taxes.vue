@@ -48,37 +48,45 @@ export default defineComponent({
 </script>
 
 <template>
-  <router-link to="/" class="navigation">
-    <ChevronIcon />
-    Заплатить налоги за ИП
-  </router-link>
-  <div class="container">
-    <div class="income">
-      <div>Ваш доход за полугодие:</div>
-      <div>{{ form.income.toLocaleString() }} ₸</div>
+  <main class="main">
+    <router-link to="/" class="navigation">
+      <ChevronIcon />
+      Заплатить налоги за ИП
+    </router-link>
+    <div class="taxes container">
+      <div class="income">
+        <div>Ваш доход за полугодие:</div>
+        <div>{{ form.income.toLocaleString() }} ₸</div>
+      </div>
+      <div class="taxes-items">
+        <TaxItem
+          v-for="tax in form.taxes_with_price"
+          :tax="tax"
+          :key="tax.id"
+          @change="handleChange"
+        />
+        <span class="error" v-show="error">
+          Должен быть выбран хотя бы один налог
+        </span>
+      </div>
     </div>
-    <div class="taxes-items">
-      <TaxItem
-        v-for="tax in form.taxes_with_price"
-        :tax="tax"
-        :key="tax.id"
-        @change="handleChange"
-      />
-    </div>
-    <span class="error" v-show="error">
-      Должен быть выбран хотя бы один налог
-    </span>
-    <div class="submit">
+    <div class="submit container">
       <div class="sum">
         <div>Итого к оплате за полугодие:</div>
         <div class="total">{{ form.total().toLocaleString() }} ₸</div>
       </div>
       <Button @onClick="handleValidate">Оплатить</Button>
     </div>
-  </div>
+  </main>
 </template>
 
 <style scoped>
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .navigation {
   display: flex;
   align-items: center;
@@ -87,38 +95,38 @@ export default defineComponent({
   font-style: italic;
   padding: 10px 24px;
   margin-bottom: 16px;
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
   background-color: white;
 }
+
+.taxes {
+  height: 100%;
+  overflow-y: scroll;
+  gap: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.submit {
+  background: rgb(255, 255, 255);
+  align-self: flex-end;
+  width: 100%;
+  gap: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
 .income {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 24px;
   font-style: italic;
-  margin-bottom: 32px;
 }
 
-.sum {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 24px;
-  font-style: italic;
-  margin-top: 64px;
-  margin-bottom: 32px;
-}
-.total {
-  white-space: nowrap;
-}
 .taxes-items {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 32px;
 }
 
 .error {
@@ -128,5 +136,18 @@ export default defineComponent({
   padding: 15px 25px;
   border-radius: 4px;
   display: block;
+  margin-top: 16px;
+}
+
+.sum {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.total {
+  white-space: nowrap;
 }
 </style>
