@@ -22,8 +22,8 @@ export default defineComponent({
 
 <style scoped>
 .btn {
-  padding: 1rem;
-  font-size: 1.25rem;
+  padding: 16px;
+  font-size: 20px;
   width: 100%;
   font-style: italic;
   border: none;

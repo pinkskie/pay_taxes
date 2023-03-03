@@ -8,6 +8,8 @@
 body {
   font-size: 16px;
   font-family: "Cuprum", sans-serif;
+  max-width: 562px;
+  margin: 0 auto;
 }
 
 a {
@@ -17,7 +19,7 @@ a {
 }
 
 .container {
-  padding: 1.5rem;
+  padding: 24px;
 }
 
 .v-enter-active,

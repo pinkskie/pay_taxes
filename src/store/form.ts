@@ -17,7 +17,6 @@ export interface ITaxesWithPrice {
 export const useFormStore = defineStore({
   id: "form",
   state: () => ({
-    is_modal_open: false,
     name: "",
     last_name: "",
     iin: "",

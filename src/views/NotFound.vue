@@ -35,17 +35,11 @@ export default defineComponent({
 .NotFound {
   width: 100%;
   height: 100vh;
-  font-size: 5rem;
+  font-size: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: black;
   flex-direction: column;
-}
-
-@media screen and (max-width: 762px) {
-  .NotFound {
-    font-size: 2rem;
-  }
 }
 </style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { VueBottomSheet } from "@webzlodimir/vue-bottom-sheet";
 
 import Button from "../components/Button.vue";

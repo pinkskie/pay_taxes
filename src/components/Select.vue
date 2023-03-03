@@ -1,23 +1,26 @@
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, PropType, ref } from "vue";
+import { required } from "vuelidate/lib/validators";
 import ChevronIcon from "../assets/icons/ChevronIcon.vue";
 import { useFormStore } from "../store/form";
 import { tax_types } from "../store/form";
 
 export default defineComponent({
   components: { ChevronIcon },
-
   setup() {
     const form = useFormStore();
-    const options = tax_types;
+    const options = tax_types; // можно сделать масштабируемым примимая в качестве пропса
     const openOptions = ref<boolean>();
+
     const toggleOptions = () => {
       openOptions.value = !openOptions.value;
     };
+
     const selectOption = (value: number) => {
       form.changeTaxType(value);
       toggleOptions;
     };
+
     return {
       form,
       options,
@@ -30,7 +33,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="select" @click="toggleOptions">
+  <div class="select" :class="[openOptions && 'active']" @click="toggleOptions">
     {{ form.tax_type.label }}
     <ChevronIcon />
     <Transition>
@@ -53,7 +56,7 @@ export default defineComponent({
 .select {
   width: 100%;
   border: 1px solid #dfe3e6;
-  padding: 0.7rem 0.5rem;
+  padding: 10px 8px;
   position: relative;
   display: flex;
   align-items: center;
@@ -62,16 +65,17 @@ export default defineComponent({
 
 .select svg {
   transform: rotate(-90deg);
-  margin-right: 0.5rem;
+  margin-right: 10px;
 }
 
 .select svg > path {
   fill: #dfe3e6;
+  transition: 0.2s ease;
 }
 
 .options {
   position: absolute;
-  bottom: -5rem;
+  bottom: -85px;
   left: 0;
   background-color: white;
   border: 1px solid black;
@@ -79,11 +83,11 @@ export default defineComponent({
   width: 100%;
   list-style: none;
   z-index: 10;
-  max-height: 5rem;
+  max-height: 160px;
   overflow-y: scroll;
 }
 .option {
-  padding: 0.5rem;
+  padding: 10px;
   outline: none;
   border: 1px solid transparent;
   transition: 0.1s ease;
@@ -93,5 +97,9 @@ export default defineComponent({
   border: 1px solid black;
   color: white;
   outline: none;
+}
+
+.active svg > path {
+  fill: black;
 }
 </style>

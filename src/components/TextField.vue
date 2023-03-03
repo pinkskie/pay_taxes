@@ -46,31 +46,31 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   font-style: italic;
-  gap: 0.7rem;
-  font-size: 1.15rem;
+  gap: 12px;
+  font-size: 18px;
   width: 100%;
   position: relative;
 }
 .textfield {
-  padding: 0.7rem 0.5rem;
+  padding: 10px 8px;
   border: 1px solid #dfe3e6;
   border-radius: 3px;
   outline: none;
   transition: 0.2s ease;
   font-family: "Cuprum", sans-serif;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
 .textfield:focus {
   border: 1px solid black;
 }
 .error {
-  margin-top: -0.3rem;
-  font-size: 0.75rem;
+  margin-top: -0.48px;
+  font-size: 14px;
   color: red;
   display: block;
   position: absolute;
-  bottom: -1.3rem;
+  bottom: -20px;
   left: 0;
 }
 </style>

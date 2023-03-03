@@ -46,14 +46,21 @@ export default defineComponent({
     };
 
     const handleValidate = () => {
-      if (!form.name.length || !form.last_name.length || !form.iin) {
+      // name validation
+      if (!form.name.length) {
         errors.name = "Заполните поле";
-        errors.last_name = "Заполните поле";
       } else {
         errors.name = "";
+      }
+
+      // last_name validation
+      if (!form.last_name.length) {
+        errors.last_name = "Заполните поле";
+      } else {
         errors.last_name = "";
       }
 
+      // iin validation
       if (form.iin.length < 11) {
         errors.iin = "Минимальное количество символов 12";
       } else if (!regex.test(form.iin)) {
@@ -62,6 +69,7 @@ export default defineComponent({
         errors.iin = "";
       }
 
+      // income validation
       if (!form.income) {
         errors.income = "Доход не может быть равен нулю";
       } else if (Number(form.income) < 0 || Number(form.income) > 150000000) {
@@ -137,7 +145,7 @@ export default defineComponent({
       type="number"
       placeholder="Сумма дохода"
       @update:value="form.changeIncome"
-      :value="form.income.toString()"
+      :value="form.income === 0 ? '' : form.income.toString()"
       :error="errors.income"
     />
     <Button @onClick="handleValidate" variant="contained" class="btn-position"
@@ -150,33 +158,33 @@ export default defineComponent({
 .form {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  padding: 1.5rem 1.5rem 0 1.5rem;
+  gap: 40px;
+  padding: 24px 24px 0 24px;
 }
 
 .form-description {
-  line-height: 1.5rem;
-  margin-bottom: 1rem;
+  line-height: 24px;
+  margin-bottom: 16px;
 }
 .user {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .bottomSheet-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-style: italic;
-  padding: 0 1.5rem;
-  margin-bottom: 1rem;
+  padding: 0 24px;
+  margin-bottom: 16px;
 }
 
 .btn-position {
-  margin-top: 3rem;
+  margin-top: 48px;
 }
 
 .krestik {

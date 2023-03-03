@@ -55,7 +55,7 @@ export default defineComponent({
   <div class="taxes container">
     <div class="income">
       <div>Ваш доход за полугодие:</div>
-      <div>{{ form.income }} ₸</div>
+      <div>{{ form.income.toLocaleString() }} ₸</div>
     </div>
     <div class="taxes-items">
       <TaxItem
@@ -68,11 +68,13 @@ export default defineComponent({
     <span class="error" v-show="error"
       >Должен быть выбран хотя бы один налог</span
     >
-    <div class="sum">
-      <div>Итого к оплате за полугодие:</div>
-      <div class="total">{{ form.total() }} ₸</div>
+    <div class="submit">
+      <div class="sum">
+        <div>Итого к оплате за полугодие:</div>
+        <div class="total">{{ form.total().toLocaleString() }} ₸</div>
+      </div>
+      <Button @onClick="handleValidate">Оплатить</Button>
     </div>
-    <Button @onClick="handleValidate">Оплатить</Button>
   </div>
 </template>
 
@@ -80,29 +82,29 @@ export default defineComponent({
 .navigation {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  font-size: 1.5rem;
+  gap: 16px;
+  font-size: 24px;
   font-style: italic;
-  padding: 0.5rem 1.5rem;
-  margin-bottom: 1rem;
+  padding: 10px 24px;
+  margin-bottom: 16px;
 }
 .income {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-style: italic;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
 }
 
 .sum {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-style: italic;
-  margin-top: 4rem;
-  margin-bottom: 2rem;
+  margin-top: 64px;
+  margin-bottom: 32px;
 }
 .total {
   white-space: nowrap;
@@ -110,8 +112,8 @@ export default defineComponent({
 .taxes-items {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
 .error {
@@ -119,9 +121,9 @@ export default defineComponent({
   width: 100%;
   border: 1px solid rgb(121, 0, 0);
   color: rgb(121, 0, 0);
-  padding: 0.5rem;
+  padding: 10px;
   border-radius: 4px;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   display: block;
 }
 </style>

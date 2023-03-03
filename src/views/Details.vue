@@ -54,7 +54,7 @@ export default defineComponent({
       </p>
       <p class="information-text">
         <span>Ваш доход за пол года</span>
-        <span>{{ form.income }} ₸ </span>
+        <span>{{ form.income.toLocaleString() }} ₸ </span>
       </p>
       <p
         class="information-text"
@@ -62,11 +62,11 @@ export default defineComponent({
         :key="tax.id"
       >
         <span>{{ tax.label }}</span>
-        <span>{{ tax.price }} ₸</span>
+        <span>{{ tax.price.toLocaleString() }} ₸</span>
       </p>
       <p class="information-text total">
         <span>Итого оплачено за полугодие:</span>
-        <span>{{ form.total() }} ₸</span>
+        <span>{{ form.total().toLocaleString() }} ₸</span>
       </p>
     </div>
     <Button @onClick="handleClick" variant="text">Вернуться на главную</Button>
@@ -75,7 +75,7 @@ export default defineComponent({
 
 <style scoped>
 .details {
-  height: calc(100vh - 3rem);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -84,16 +84,16 @@ export default defineComponent({
   display: flex;
   align-items: center;
   text-align: center;
-  font-size: 2rem;
+  font-size: 32px;
   font-style: italic;
   justify-content: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
 }
 .information {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 16px;
   font-style: italic;
 }
 .information-text {
@@ -102,6 +102,6 @@ export default defineComponent({
   justify-content: space-between;
 }
 .total {
-  margin-top: 2rem;
+  margin-top: 32px;
 }
 </style>

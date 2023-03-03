@@ -101,10 +101,10 @@ export default defineComponent({
   background: #ffffff;
   box-shadow: 0px 0px 24px #9d9d9d;
   border-radius: 6px;
-  padding: 1rem 1.5rem;
+  padding: 16px 24px;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 32px;
 }
 .head {
   display: flex;
@@ -119,15 +119,15 @@ export default defineComponent({
 }
 
 .text {
-  font-size: 1.5rem;
+  font-size: 24px;
   text-align: right;
 }
 
 .text span {
   display: block;
   color: #9d9d9d;
-  font-size: 0.75rem;
-  max-width: 6.5rem;
+  font-size: 14px;
+  max-width: 120px;
 }
 
 .circle {
