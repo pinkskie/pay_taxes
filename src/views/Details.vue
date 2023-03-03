@@ -69,7 +69,7 @@ export default defineComponent({
         <span>{{ form.total() }} ₸</span>
       </p>
     </div>
-    <Button :onClick="handleClick" variant="text">Вернуться на главную</Button>
+    <Button @onClick="handleClick" variant="text">Вернуться на главную</Button>
   </div>
 </template>
 
@@ -80,7 +80,6 @@ export default defineComponent({
   flex-direction: column;
   justify-content: space-between;
 }
-
 .title {
   display: flex;
   align-items: center;
@@ -91,20 +90,17 @@ export default defineComponent({
   flex-direction: column;
   gap: 1rem;
 }
-
 .information {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   font-style: italic;
 }
-
 .information-text {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .total {
   margin-top: 2rem;
 }

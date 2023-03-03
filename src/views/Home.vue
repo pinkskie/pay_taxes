@@ -35,7 +35,7 @@ export default defineComponent({
 
 <template>
   <div class="home">
-    <Button :onClick="openBottomSheet" variant="outlined"
+    <Button @onClick="openBottomSheet" variant="outlined"
       >Налоговый вычет</Button
     >
     <vue-bottom-sheet ref="bottomSheet" max-height="90%">

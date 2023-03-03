@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, PropType, reactive, Ref, ref } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import { VueBottomSheet } from "@webzlodimir/vue-bottom-sheet";
 
 import { useFormStore } from "../store/form";
@@ -20,7 +20,7 @@ export default defineComponent({
     KrestikIcon,
     VueBottomSheet,
   },
-  emit: ["close"],
+  emits: ["close"],
   setup() {
     const bottomSheet = ref<InstanceType<typeof VueBottomSheet> | null>(null);
     const form = useFormStore();
@@ -86,7 +86,6 @@ export default defineComponent({
       bottomSheet,
       maxLength,
       handleValidate,
-      // openBottomSheet,
       closeBottomSheet,
     };
   },
@@ -141,7 +140,7 @@ export default defineComponent({
       :value="form.income.toString()"
       :error="errors.income"
     />
-    <Button :onClick="handleValidate" variant="contained" class="btn-position"
+    <Button @onClick="handleValidate" variant="contained" class="btn-position"
       >Рассчитать</Button
     >
   </div>

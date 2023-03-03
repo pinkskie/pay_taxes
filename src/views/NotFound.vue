@@ -25,7 +25,7 @@ export default defineComponent({
 <template>
   <div class="NotFound">
     <img src="../assets/404.png" alt="404" />
-    <Button :onClick="handleClick" variant="text">
+    <Button @onClick="handleClick" variant="text">
       Вернуться на главную
     </Button>
   </div>

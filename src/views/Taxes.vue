@@ -75,7 +75,7 @@ export default defineComponent({
       <div>Итого к оплате за полугодие:</div>
       <div class="total">{{ form.total() }} ₸</div>
     </div>
-    <Button :onClick="handleValidate">Оплатить</Button>
+    <Button @onClick="handleValidate">Оплатить</Button>
   </div>
 </template>
 

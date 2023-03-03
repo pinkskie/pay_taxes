@@ -3,22 +3,19 @@ import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "Button",
+  emits: ["onClick"],
   props: {
     variant: {
       type: String,
       required: false,
       default: "contained",
     },
-    onClick: {
-      type: Function as PropType<() => void>,
-      required: true,
-    },
   },
 });
 </script>
 
 <template>
-  <button class="btn" :class="variant" @click="onClick">
+  <button class="btn" :class="variant" @click="$emit('onClick')">
     <slot></slot>
   </button>
 </template>
