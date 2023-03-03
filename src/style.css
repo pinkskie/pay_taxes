@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: auto !important;
+}
+
 body {
   font-size: 16px;
   font-family: "Cuprum", sans-serif;

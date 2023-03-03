@@ -22,6 +22,9 @@ export default defineComponent({
     error: {
       type: String,
     },
+    maxLength: {
+      type: Number,
+    },
   },
   emits: ["update:value"],
 });
@@ -34,6 +37,7 @@ export default defineComponent({
       class="textfield"
       :type="type"
       :placeholder="placeholder"
+      :maxlength="maxLength"
       :value="value"
       @input="$emit('update:value', ($event.target as HTMLInputElement).value)"
     />

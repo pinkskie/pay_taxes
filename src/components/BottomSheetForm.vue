@@ -62,9 +62,9 @@ export default defineComponent({
 
       // iin validation
       if (form.iin.length < 11) {
-        errors.iin = "Минимальное количество символов 12";
+        errors.iin = "ИИН должен содержать 12 цифр";
       } else if (!regex.test(form.iin)) {
-        errors.iin = "Введите только числа";
+        errors.iin = "Введите только числа"; // тут можно было бы просто прописать type=number, просто для практики
       } else {
         errors.iin = "";
       }
@@ -138,6 +138,7 @@ export default defineComponent({
       @update:value="form.changeIin"
       :value="form.iin"
       :error="errors.iin"
+      :maxLength="12"
     />
     <Select />
     <TextField
@@ -159,7 +160,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding: 24px 24px 0 24px;
+  padding: 24px;
 }
 
 .form-description {

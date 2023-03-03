@@ -52,7 +52,7 @@ export default defineComponent({
     <ChevronIcon />
     Заплатить налоги за ИП
   </router-link>
-  <div class="taxes container">
+  <div class="container">
     <div class="income">
       <div>Ваш доход за полугодие:</div>
       <div>{{ form.income.toLocaleString() }} ₸</div>
@@ -87,6 +87,11 @@ export default defineComponent({
   font-style: italic;
   padding: 10px 24px;
   margin-bottom: 16px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
 }
 .income {
   display: flex;
